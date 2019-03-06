@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Projet</string>
+    <string name="title_activity_acceuil">Acceuil</string>
+    <string name="Acceuil_str">Ani-liste</string>
+    <string name="desc_str">test1</string>
+    <string name="titre_str">test2</string>
 </resources>
