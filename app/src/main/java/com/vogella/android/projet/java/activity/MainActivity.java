@@ -1,5 +1,6 @@
 package com.vogella.android.projet.java.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -58,11 +59,23 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-                public void onFailure(Call<ReponseAPI> call, Throwable t) {
+            public void onFailure(Call<ReponseAPI> call, Throwable t) {
                 Log.d("ERROR", "Api Error");
             }
         });
     }
+    private com.vogella.android.projet.java.activity.MyAdapter.OnItemClickListener getListener () {
+        return new com.vogella.android.projet.java.activity.MyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Anime_info item) {
+                Intent i = new Intent(getBaseContext(), InfoActivity.class);
+                i.putExtra("key", item.getMal_id());
+                startActivity(i);
+            }
+        };
+    }
+
+
 
 
 
@@ -73,11 +86,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         // define an adapter
-        mAdapter = new MyAdapter(input);
+        mAdapter = new com.vogella.android.projet.java.activity.MyAdapter(input , getListener());
         recyclerView.setAdapter(mAdapter);
-
-        for(Anime_info i: input){
-            System.out.println(i.getTitle()+";");
-        }
     }
 }

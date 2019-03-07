@@ -18,7 +18,7 @@
             android:layout_marginStart="100dp"
             android:layout_marginLeft="100dp"
             android:contentDescription="Image_haut_page"
-            app:srcCompat="@mipmap/shiro_chibi" />
+            app:srcCompat="@mipmap/icone" />
     </android.support.v7.widget.Toolbar>
 
 

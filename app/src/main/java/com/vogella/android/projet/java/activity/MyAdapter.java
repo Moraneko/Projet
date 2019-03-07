@@ -18,7 +18,10 @@ import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Anime_info> values;
-
+    private OnItemClickListener listener ;
+    public interface OnItemClickListener {
+        void onItemClick(Anime_info item);
+    }
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
@@ -69,8 +72,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<Anime_info> myDataset) {
+    public MyAdapter(List<Anime_info> myDataset , OnItemClickListener listener) {
         this.values = myDataset;
+        this.listener = listener;
     }
 
     // Create new views (invoked by the layout manager)
@@ -101,6 +105,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         holder.txtFooter.setText(description);
         // show The Image in a ImageView
         new DownLoadImageTask(holder.imgInfo).execute(urlStr);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                listener.onItemClick(current_Anime);
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
