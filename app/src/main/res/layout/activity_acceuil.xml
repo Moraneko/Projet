@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:hapticFeedbackEnabled="false"
     android:background="@color/acceuil_color"
-    tools:context=".java.activity.Acceuil"
+    tools:context=".java.activity.View.Acceuil"
 
     >
 

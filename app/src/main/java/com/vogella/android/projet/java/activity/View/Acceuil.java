@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity;
+package com.vogella.android.projet.java.activity.View;
 
 import android.os.Bundle;
 

@@ -1,4 +1,6 @@
-package com.vogella.android.projet.java.activity.model;
+package com.vogella.android.projet.java.activity.Model;
+
+import android.graphics.Bitmap;
 
 public class Anime_info {
 
@@ -13,6 +15,7 @@ public class Anime_info {
     private String end_date;
     private int members;
     private double score;
+    private Bitmap image;
 
     public int getMal_id() {
         return mal_id;
@@ -103,4 +106,11 @@ public class Anime_info {
     }
 
 
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
 }

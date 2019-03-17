@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity;
+package com.vogella.android.projet.java.activity.View;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +10,10 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vogella.android.projet.R;
-import com.vogella.android.projet.java.activity.model.Anime_info;
-import com.vogella.android.projet.java.activity.model.ReponseAPI;
+import com.vogella.android.projet.java.activity.Model.JikkanAPI;
+import com.vogella.android.projet.java.activity.Controler.MyAdapter;
+import com.vogella.android.projet.java.activity.Model.Anime_info;
+import com.vogella.android.projet.java.activity.Model.ReponseAPI;
 
 import java.util.List;
 
@@ -30,12 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        // use this setting to
-        // improve performance if you know that changes
-        // in content do not change the layout size
-        // of the RecyclerView
         recyclerView.setHasFixedSize(true);
-        // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         Gson gson = new GsonBuilder()
@@ -47,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
+
         JikkanAPI animeApi = retrofit.create(JikkanAPI.class);
 
-        Call<ReponseAPI> call = animeApi.getListAnime();
+        Call<ReponseAPI> call = animeApi.getListAnime("1");
         call.enqueue(new Callback<ReponseAPI>() {
             @Override
             public void onResponse(Call<ReponseAPI> call, Response<ReponseAPI> response) {
@@ -64,8 +62,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    private com.vogella.android.projet.java.activity.MyAdapter.OnItemClickListener getListener () {
-        return new com.vogella.android.projet.java.activity.MyAdapter.OnItemClickListener() {
+
+    private MyAdapter.OnItemClickListener getListener () {
+        return new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Anime_info item) {
                 Intent i = new Intent(getBaseContext(), InfoActivity.class);
@@ -75,18 +74,14 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-
-
-
-
-
     public void showList(List<Anime_info> input){
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         // define an adapter
-        mAdapter = new com.vogella.android.projet.java.activity.MyAdapter(input , getListener());
+        mAdapter = new MyAdapter(input , getListener());
         recyclerView.setAdapter(mAdapter);
+
     }
 }

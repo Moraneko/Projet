@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity.model;
+package com.vogella.android.projet.java.activity.Model;
 
 
 import java.util.List;

@@ -10,8 +10,7 @@
         android:id="@+id/Image_affiche"
         android:layout_width="82dp"
         android:layout_height="90dp"
-        tools:srcCompat="@tools:sample/backgrounds/scenic[0]"
-        />
+        tools:srcCompat="@tools:sample/backgrounds/scenic[0]" />
 
     <TextView
         android:id="@+id/secondLine"
