@@ -1,17 +1,12 @@
 package com.vogella.android.projet.java.activity.Controler;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.vogella.android.projet.R;
 import com.vogella.android.projet.java.activity.Model.SingleInfo;
-
-import java.io.InputStream;
-import java.net.URL;
 
 public class AdapterInfo{
     View v;
@@ -20,27 +15,6 @@ public class AdapterInfo{
     public AdapterInfo(View v,SingleInfo info){
         this.v=v;
         this.info=info;
-    }
-
-    private class DownLoadImageTask extends AsyncTask<String,Void,Bitmap> {
-        ImageView imageView;
-        public DownLoadImageTask(ImageView imageView , SingleInfo anime){
-            this.imageView = imageView;
-        }
-        protected Bitmap doInBackground(String...urls){
-            String urlOfImage = urls[0];
-            Bitmap logo = null;
-            try{
-                InputStream is = new URL(urlOfImage).openStream();
-                logo = BitmapFactory.decodeStream(is);
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-            return logo;
-        }
-        protected void onPostExecute(Bitmap result){
-            imageView.setImageBitmap(result);
-        }
     }
     public void setLayout(){
         TextView titre = v.findViewById(R.id.titreJap);
@@ -53,7 +27,7 @@ public class AdapterInfo{
         TextView synopsis = v.findViewById(R.id.synopsis);
         ImageView img = v.findViewById(R.id.imageAnime);
 
-        new DownLoadImageTask(img,info).execute(info.getImage_url());
+        Picasso.with(v.getContext()).load(info.getImage_url()).into(img);
         titre.setText("Titre: "+info.getTitle());
         if(info.getTitle_english() != null){
             titreEng.setText("Titre anglais: "+info.getTitle_english());

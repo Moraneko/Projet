@@ -14,10 +14,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".java.activity.View.InfoActivity"></activity>
         <activity android:name=".java.activity.View.row_activity" />
-        <activity
-            android:name=".java.activity.View.Acceuil"
-            android:label="@string/title_activity_acceuil"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".java.activity.View.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

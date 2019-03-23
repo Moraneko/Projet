@@ -1,8 +1,6 @@
 package com.vogella.android.projet.java.activity.Controler;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.vogella.android.projet.R;
 import com.vogella.android.projet.java.activity.Model.Anime_info;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -30,35 +27,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public TextView txtHeader;
         public TextView txtFooter;
         public ImageView imgInfo;
+        public Context context;
         public View layout;
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
-            txtHeader = (TextView) v.findViewById(R.id.firstLine);
-            txtFooter = (TextView) v.findViewById(R.id.secondLine);
-            imgInfo = (ImageView) v.findViewById(R.id.Image_affiche);
-        }
-    }
-    private class DownLoadImageTask extends AsyncTask<String,Void,Bitmap>{
-        ImageView imageView;
-        Anime_info anime;
-        public DownLoadImageTask(ImageView imageView){
-            this.imageView = imageView;
-        }
-        protected Bitmap doInBackground(String...urls){
-            String urlOfImage = urls[0];
-            Bitmap logo = null;
-            try{
-                InputStream is = new URL(urlOfImage).openStream();
-                logo = BitmapFactory.decodeStream(is);
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-            return logo;
-        }
-        protected void onPostExecute(Bitmap result){
-            imageView.setImageBitmap(result);
+            txtHeader = v.findViewById(R.id.firstLine);
+            txtFooter = v.findViewById(R.id.secondLine);
+            imgInfo = v.findViewById(R.id.Image_affiche);
+            context = v.getContext();
         }
     }
     public void add(int position, Anime_info item) {
@@ -95,8 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         final String urlStr = current_Anime.getImage_url();
         holder.txtHeader.setText(name);
         holder.txtFooter.setText(description);
-        // show The Image in a ImageView
-        new DownLoadImageTask(holder.imgInfo).execute(urlStr);
+        Picasso.with(holder.context).load(urlStr).into(holder.imgInfo);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 listener.onItemClick(current_Anime);
