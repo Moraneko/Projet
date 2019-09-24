@@ -1,6 +1,11 @@
 package com.vogella.android.projet.java.activity.View;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +13,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Button;
+import android.support.v7.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -18,6 +25,7 @@ import com.vogella.android.projet.java.activity.Controler.MyAdapter;
 import com.vogella.android.projet.java.activity.Model.Anime_info;
 import com.vogella.android.projet.java.activity.Model.ReponseAPI;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -41,6 +49,17 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        // Adding Toolbar to Main screen
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        // Setting ViewPager for each Tabs
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+        // Set Tabs inside Toolbar
+        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
+
+
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -51,9 +70,11 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         JikkanAPI animeApi = retrofit.create(JikkanAPI.class);
+
         this.api = animeApi;
         appelApi();
 
+        /*//Gestion des boutons
         NestedScrollView scrollView = findViewById(R.id.nestedScroll);
         Button next = findViewById(R.id.PreviousButton);
         next.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
         Button previous = findViewById(R.id.NextButton);
         previous.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -72,7 +94,43 @@ public class MainActivity extends AppCompatActivity {
                 appelApi();
                 scrollView.smoothScrollTo(0,0);
             }
-        });
+        });*/
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        Adapter adapter = new Adapter(getSupportFragmentManager());
+        adapter.addFragment(new ListContentFragment(), "List");
+        adapter.addFragment(new TileContentFragment(), "Tile");
+        adapter.addFragment(new CardContentFragment(), "Card");
+        viewPager.setAdapter(adapter);
+    }
+    static class Adapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public Adapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 
     private void appelApi() {
@@ -105,10 +163,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void showList(List<Anime_info> input){
         recyclerView.setHasFixedSize(true);
-        // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        // define an adapter
         mAdapter = new MyAdapter(input , getListener());
         recyclerView.setAdapter(mAdapter);
     }
