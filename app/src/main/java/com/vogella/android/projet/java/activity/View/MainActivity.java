@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private Integer page =1;
     private JikkanAPI api;
+    List<Anime_info> dataFromApi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,25 +53,10 @@ public class MainActivity extends AppCompatActivity {
         // Adding Toolbar to Main screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Setting ViewPager for each Tabs
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-        // Set Tabs inside Toolbar
-        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
 
-
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.jikan.moe/v3/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
+        Gson gson = new GsonBuilder().setLenient().create();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.jikan.moe/v3/").addConverterFactory(GsonConverterFactory.create(gson)).build();
         JikkanAPI animeApi = retrofit.create(JikkanAPI.class);
-
         this.api = animeApi;
         appelApi();
 
@@ -97,9 +83,22 @@ public class MainActivity extends AppCompatActivity {
         });*/
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void affichageTabs() {
+        // Setting ViewPager for each Tabs
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager, dataFromApi);
+        // Set Tabs inside Toolbar
+        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
+    }
+
+    private void setupViewPager(ViewPager viewPager, List<Anime_info> input) {
+        Bundle data = new Bundle();
+        data.putString("Key1", new Gson().toJson(input));
+        ListContentFragment fragList = new ListContentFragment();
+        fragList.setArguments(data);
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new ListContentFragment(), "List");
+        adapter.addFragment(fragList, "List");
         adapter.addFragment(new TileContentFragment(), "Tile");
         adapter.addFragment(new CardContentFragment(), "Card");
         viewPager.setAdapter(adapter);
@@ -162,10 +161,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showList(List<Anime_info> input){
-        recyclerView.setHasFixedSize(true);
+        dataFromApi = input;
+        affichageTabs();
+        /*recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new MyAdapter(input , getListener());
-        recyclerView.setAdapter(mAdapter);
+        recyclerView.setAdapter(mAdapter);*/
     }
 }
