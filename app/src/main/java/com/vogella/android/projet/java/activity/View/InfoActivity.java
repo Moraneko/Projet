@@ -1,6 +1,6 @@
 package com.vogella.android.projet.java.activity.View;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import com.google.gson.Gson;
