@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:androidx="http://schemas.android.com/apk/res/android">
+    <group androidx:checkableBehavior="single">
+        <item
+            androidx:id="@+id/anime"
+            androidx:icon="@drawable/ic_stars_black_24dp"
+            androidx:title="Anime Liste " />
+        <item
+            androidx:id="@+id/perso"
+            androidx:icon="@drawable/ic_account_box_black_24dp"
+            androidx:title="Espace Perso" />
+        <item
+            androidx:id="@+id/quit"
+            androidx:icon="@drawable/ic_arrow_back_black_24dp"
+            androidx:title="Quitter" />
+    </group>
+</menu>
