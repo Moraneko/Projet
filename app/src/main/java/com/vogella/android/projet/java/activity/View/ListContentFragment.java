@@ -40,9 +40,11 @@ public class ListContentFragment extends Fragment {
     List<Anime_info> dataFromApi;
     private Integer page =1;
     private Boolean apiEndCall = false;
+    private RecyclerView recyclerView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.jikan.moe/v3/").addConverterFactory(GsonConverterFactory.create(gson)).build();
         JikkanAPI animeApi = retrofit.create(JikkanAPI.class);
@@ -54,13 +56,13 @@ public class ListContentFragment extends Fragment {
         //  Bundle dataBundle = getArguments();
         //dataFromApi = new Gson().fromJson(dataBundle.getString("Key1"), collectionType);
 
-
-        return appelApi(inflater,container,savedInstanceState);
+        View retView = inflater.inflate(R.layout.fragment_list_anime, container, false);
+        recyclerView = retView.findViewById(R.id.my_recycler_view);
+        appelApi();
+        return retView;
     }
 
-    private View appelApi(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        RecyclerView recyclerView = (RecyclerView) inflater.inflate(
-                R.layout.recycler_view, container, false);
+    private View appelApi() {
         Call<ReponseAPI> call = this.api.getListAnime(this.page.toString());
         call.enqueue(new Callback<ReponseAPI>() {
             @Override

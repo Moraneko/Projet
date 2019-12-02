@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vogella.android.projet">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".java.activity.View.InfoActivity"></activity>
+        <activity android:name=".java.activity.View.IntroActivity"></activity>
+        <activity android:name=".java.activity.View.InfoActivity" />
         <activity android:name=".java.activity.View.row_activity" />
-
         <activity android:name=".java.activity.View.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
