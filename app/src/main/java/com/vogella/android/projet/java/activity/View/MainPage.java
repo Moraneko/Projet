@@ -14,35 +14,37 @@ package com.vogella.android.projet.java.activity.View;
         import android.widget.Toast;
 
         import com.vogella.android.projet.R;
+        import com.vogella.android.projet.java.activity.Controler.MainPageControler;
         import com.vogella.android.projet.java.activity.Model.Anime_info;
 
         import java.util.ArrayList;
         import java.util.List;
 
 public class MainPage extends AppCompatActivity {
-    private Integer page =1;
-    List<Anime_info> dataFromApi;
-    private List<Anime_info> myFavorite;
     DrawerLayout drawerLayout;
+    MainPageControler mainControler;
+    ListContentFragment fragList;
+    MyProfileFragment fragProfile;
+    QuitFragment fragQuit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
         String userName = getIntent().getStringExtra("userName");
-
+        mainControler = new MainPageControler(findViewById(R.id.main_content),userName);
         // Adding Drawer to Main Screen
         initNavDrawer();
         // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);
-        Fragment frag = new ListContentFragment();
+        Fragment frag = fragList;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame, frag); // replace a Fragment with Frame Layout
         transaction.commit();
-        myFavorite = new ArrayList<>();
-
     }
-
     private void initNavDrawer() {
+        fragList = new ListContentFragment(mainControler);
+        fragProfile = new MyProfileFragment();
+        fragQuit = new QuitFragment();
         drawerLayout = findViewById(R.id.drawer_layout_id);
         NavigationView navView = findViewById(R.id.navigation_id);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -51,11 +53,11 @@ public class MainPage extends AppCompatActivity {
                 Fragment frag = null;
                 int id = menuItem.getItemId();
                 if (id == R.id.anime) {
-                    frag = new ListContentFragment();
+                    frag = fragList;
                 } else if (id == R.id.perso) {
-                    frag = new MyProfileFragment();
+                    frag = fragProfile;
                 } else if (id == R.id.quit) {
-                    frag = new QuitFragment();
+                    frag = fragQuit;
                 }
                 if (frag != null) {
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -69,21 +71,9 @@ public class MainPage extends AppCompatActivity {
         });
     }
     public void clickList(View v) {
-        System.out.println(v.getTag());
+        mainControler.clickAnime(v.getTag());
     }
     public void favorisClick(View v) {
-        System.out.println(v.getTag());
-        Integer var = (Integer) v.getTag();
-        Anime_info myFav;
-        for(Anime_info i : dataFromApi) {
-            if( i.getMal_id() == var){
-                myFav = i;
-                if(this.myFavorite.contains(myFav)){
-                    this.myFavorite.remove(myFav); // Mettre l'effet bouton favoris
-                }else{
-                    this.myFavorite.add(myFav); // Mettre l'effet bouton favoris
-                }
-            }
-        }
+        mainControler.clickFavoris(v.getTag());
     }
 }
