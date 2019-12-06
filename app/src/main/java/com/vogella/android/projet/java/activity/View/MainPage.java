@@ -11,13 +11,15 @@ package com.vogella.android.projet.java.activity.View;
         import android.os.Bundle;
         import android.view.MenuItem;
         import android.view.View;
+        import android.widget.Toast;
+
         import com.vogella.android.projet.R;
         import com.vogella.android.projet.java.activity.Model.Anime_info;
 
         import java.util.ArrayList;
         import java.util.List;
 
-public class IntroActivity extends AppCompatActivity {
+public class MainPage extends AppCompatActivity {
     private Integer page =1;
     List<Anime_info> dataFromApi;
     private List<Anime_info> myFavorite;
@@ -26,6 +28,7 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
+        String userName = getIntent().getStringExtra("userName");
 
         // Adding Drawer to Main Screen
         initNavDrawer();
