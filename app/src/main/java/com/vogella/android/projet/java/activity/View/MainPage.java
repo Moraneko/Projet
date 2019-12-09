@@ -1,7 +1,5 @@
 package com.vogella.android.projet.java.activity.View;
 
-        import android.content.Intent;
-
         import com.google.android.material.navigation.NavigationView;
 
         import androidx.drawerlayout.widget.DrawerLayout;
@@ -11,19 +9,14 @@ package com.vogella.android.projet.java.activity.View;
         import android.os.Bundle;
         import android.view.MenuItem;
         import android.view.View;
-        import android.widget.Toast;
 
         import com.vogella.android.projet.R;
         import com.vogella.android.projet.java.activity.Controler.MainPageControler;
-        import com.vogella.android.projet.java.activity.Model.Anime_info;
 
-        import java.util.ArrayList;
-        import java.util.List;
-
-public class MainPage extends AppCompatActivity {
+public class MainPage extends AppCompatActivity  {
     DrawerLayout drawerLayout;
     MainPageControler mainControler;
-    ListContentFragment fragList;
+    AllAnimeFragment fragList;
     MyProfileFragment fragProfile;
     QuitFragment fragQuit;
     @Override
@@ -42,8 +35,8 @@ public class MainPage extends AppCompatActivity {
         transaction.commit();
     }
     private void initNavDrawer() {
-        fragList = new ListContentFragment(mainControler);
-        fragProfile = new MyProfileFragment();
+        fragList = new AllAnimeFragment(mainControler);
+        fragProfile = new MyProfileFragment(mainControler);
         fragQuit = new QuitFragment();
         drawerLayout = findViewById(R.id.drawer_layout_id);
         NavigationView navView = findViewById(R.id.navigation_id);

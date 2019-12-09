@@ -10,7 +10,7 @@ import com.squareup.picasso.Picasso;
 import com.vogella.android.projet.R;
 import com.vogella.android.projet.java.activity.Model.Anime_info;
 import com.vogella.android.projet.java.activity.Model.FavorisList;
-import com.vogella.android.projet.java.activity.View.ListContentFragment;
+import com.vogella.android.projet.java.activity.View.AllAnimeFragment;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * Adapter to display recycler view.
  */
-public class RecyclerAdapter extends RecyclerView.Adapter<ListContentFragment.ViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<AllAnimeFragment.ViewHolder> {
     Context context;
     List<Anime_info> dataFromApi;
     private FavorisList favList;
@@ -32,12 +32,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ListContentFragment.Vi
     }
 
     @Override
-    public ListContentFragment.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ListContentFragment.ViewHolder(LayoutInflater.from(parent.getContext()), parent);
+    public AllAnimeFragment.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new AllAnimeFragment.ViewHolder(LayoutInflater.from(parent.getContext()), parent);
     }
 
     @Override
-    public void onBindViewHolder(ListContentFragment.ViewHolder holder, int position) {
+    public void onBindViewHolder(AllAnimeFragment.ViewHolder holder, int position) {
         Anime_info current_Anime = dataFromApi.get(position);
         Picasso.with(holder.context).load(current_Anime.getImage_url()).into(holder.avator);
         holder.name.setText(current_Anime.getTitle());

@@ -3,7 +3,7 @@ package com.vogella.android.projet.java.activity.Model;
 import java.util.HashMap;
 
 public class FavorisList {
-    private HashMap<Integer,Anime_info> favList;
+    private HashMap<Integer,SingleInfo> favList;
     public FavorisList () {
         this.favList = new HashMap<>();
     }
@@ -14,7 +14,7 @@ public class FavorisList {
             return false;
         }
     }
-    public void addFav(Anime_info info){
+    public void addFav(SingleInfo info){
         if(!favList.keySet().contains(info.getMal_id())) {
             favList.put(info.getMal_id(), info);
             System.out.println("Ajout de l'anime:" + info.getTitle());
