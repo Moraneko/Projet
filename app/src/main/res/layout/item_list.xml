@@ -90,9 +90,9 @@
         android:layout_toEndOf="@+id/card"
         android:layout_toRightOf="@+id/card"
         android:background="#00FFFFFF"
-        android:src="@android:drawable/btn_star_big_off"
         android:contentDescription="btn favoris"
         android:onClick="favorisClick"
+        android:src="@drawable/star_off"
         android:tag="@+id/tag2" />
 
 </RelativeLayout>

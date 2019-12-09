@@ -69,5 +69,4 @@ public class ListContentFragment extends Fragment {
             context = itemView.getContext();
         }
     }
-
 }

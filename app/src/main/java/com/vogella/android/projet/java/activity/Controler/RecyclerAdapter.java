@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
+import com.vogella.android.projet.R;
 import com.vogella.android.projet.java.activity.Model.Anime_info;
+import com.vogella.android.projet.java.activity.Model.FavorisList;
 import com.vogella.android.projet.java.activity.View.ListContentFragment;
 
 import java.util.List;
@@ -20,11 +22,13 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RecyclerAdapter extends RecyclerView.Adapter<ListContentFragment.ViewHolder> {
     Context context;
     List<Anime_info> dataFromApi;
+    private FavorisList favList;
     // Set numbers of List in RecyclerView.
-    private static final int LENGTH = 18;
-    public RecyclerAdapter(Context context, List<Anime_info> input) {
+    private static final int LENGTH = 50;
+    public RecyclerAdapter(Context context, List<Anime_info> input, FavorisList favList) {
         this.dataFromApi = input;
         Resources resources = context.getResources();
+        this.favList = favList;
     }
 
     @Override
@@ -40,6 +44,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ListContentFragment.Vi
         holder.description.setText("Rang: "+current_Anime.getRank());
         holder.addFav.setTag(current_Anime.getMal_id());
         holder.layoutContainer.setTag(current_Anime.getMal_id());
+        holder.addFav.setImageResource(R.drawable.star_off);
+        if(favList.isFav(current_Anime.getMal_id())){
+            holder.addFav.setImageResource(R.drawable.star_on);
+        }
 
     }
 

@@ -6,6 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,7 +28,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FragListControler {
+public class FragListControler  {
     private JikkanAPI api;
     private MainPageControler mainContoler;
     private LayoutInflater inflater;
@@ -40,15 +43,35 @@ public class FragListControler {
         this.inflater = inflater;
         this.container = container;
         this.savedInstanceState = savedInstanceState;
+        this.activity = activity;
     }
     public View initView() {
         Gson gson = new GsonBuilder().setLenient().create();
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.jikan.moe/v3/").addConverterFactory(GsonConverterFactory.create(gson)).build();
         JikkanAPI animeApi = retrofit.create(JikkanAPI.class);
         this.api = animeApi;
-
         View retView = inflater.inflate(R.layout.fragment_list_anime, container, false);
         recyclerView = retView.findViewById(R.id.my_recycler_view);
+        TextView headerText = retView.findViewById(R.id.headerText);
+        headerText.setText("Bienvenue " + mainContoler.getName());
+        Button next = retView.findViewById(R.id.suivant);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                page++;
+                appelApi();
+            }
+        });
+        Button prec = retView.findViewById(R.id.precedent);
+        prec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(page>1){
+                    page--;
+                    appelApi();
+                }
+            }
+        });
         appelApi();
         return retView;
     }
@@ -60,7 +83,7 @@ public class FragListControler {
                 ReponseAPI restAnime = response.body();
                 List<Anime_info> listAnime = restAnime.getResult();
                 mainContoler.setDataFromApi(listAnime);
-                RecyclerAdapter adapter = new RecyclerAdapter(recyclerView.getContext(), mainContoler.getDataFromApi());
+                RecyclerAdapter adapter = new RecyclerAdapter(recyclerView.getContext(), mainContoler.getDataFromApi(),mainContoler.getFavorisList());
                 recyclerView.setAdapter(adapter);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(activity));

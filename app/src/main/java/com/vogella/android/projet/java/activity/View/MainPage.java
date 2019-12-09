@@ -71,9 +71,9 @@ public class MainPage extends AppCompatActivity {
         });
     }
     public void clickList(View v) {
-        mainControler.clickAnime(v.getTag());
+        mainControler.clickAnime(v.getTag(), v);
     }
     public void favorisClick(View v) {
-        mainControler.clickFavoris(v.getTag());
+        mainControler.clickFavoris(v.getTag(), v);
     }
 }
