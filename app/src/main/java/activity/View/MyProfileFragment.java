@@ -5,12 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+
 import activity.Controler.MainPageControler;
 import activity.Controler.ProfileControler;
 
 import androidx.fragment.app.Fragment;
 
-public class MyProfileFragment extends Fragment  {
+public class MyProfileFragment extends Fragment {
     private MainPageControler mainControler;
     private ProfileControler profileControler;
 
@@ -23,6 +27,4 @@ public class MyProfileFragment extends Fragment  {
         profileControler = new ProfileControler(mainControler, inflater, container, savedInstanceState, getActivity());
         return profileControler.initView();
     }
-
-
 }

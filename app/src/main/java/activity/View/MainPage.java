@@ -1,5 +1,8 @@
 package activity.View;
 
+        import com.github.mikephil.charting.data.Entry;
+        import com.github.mikephil.charting.highlight.Highlight;
+        import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
         import com.google.android.material.navigation.NavigationView;
 
         import androidx.drawerlayout.widget.DrawerLayout;
@@ -13,18 +16,19 @@ package activity.View;
         import com.vogella.android.projet.R;
         import activity.Controler.MainPageControler;
 
-public class MainPage extends AppCompatActivity  {
+public class MainPage extends AppCompatActivity {
     DrawerLayout drawerLayout;
     MainPageControler mainControler;
     AllAnimeFragment fragList;
     MyProfileFragment fragProfile;
     QuitFragment fragQuit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
         String userName = getIntent().getStringExtra("userName");
-        mainControler = new MainPageControler(findViewById(R.id.main_content),userName);
+        mainControler = new MainPageControler(findViewById(R.id.main_content), userName);
         // Adding Drawer to Main Screen
         initNavDrawer();
         // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -34,6 +38,7 @@ public class MainPage extends AppCompatActivity  {
         transaction.replace(R.id.frame, frag); // replace a Fragment with Frame Layout
         transaction.commit();
     }
+
     private void initNavDrawer() {
         fragList = new AllAnimeFragment(mainControler);
         fragProfile = new MyProfileFragment(mainControler);
@@ -63,10 +68,13 @@ public class MainPage extends AppCompatActivity  {
             }
         });
     }
+
     public void clickList(View v) {
         mainControler.clickAnime(v.getTag(), v);
     }
+
     public void favorisClick(View v) {
         mainControler.clickFavoris(v.getTag(), v);
     }
+
 }

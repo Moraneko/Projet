@@ -12,7 +12,7 @@ public class SingleInfo {
     private String title_english;
     private String type;
     private String source;
-    private String episodes;
+    private int episodes;
     private String duration;
     private String rating;
     private double score;
@@ -71,11 +71,11 @@ public class SingleInfo {
         this.source = source;
     }
 
-    public String getEpisodes() {
+    public int getEpisodes() {
         return episodes;
     }
 
-    public void setEpisodes(String episodes) {
+    public void setEpisodes(int episodes) {
         this.episodes = episodes;
     }
 

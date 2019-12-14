@@ -7,7 +7,7 @@ import android.view.View;
 import com.vogella.android.projet.R;
 import activity.Controler.MainActivityControler;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
     private MainActivityControler controler;
 
     @Override
