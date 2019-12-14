@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity.Model;
+package activity.Model;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

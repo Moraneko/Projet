@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity.Controler;
+package activity.Controler;
 
 
 import android.content.Context;
@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 
 import com.squareup.picasso.Picasso;
 import com.vogella.android.projet.R;
-import com.vogella.android.projet.java.activity.Model.Anime_info;
-import com.vogella.android.projet.java.activity.Model.FavorisList;
-import com.vogella.android.projet.java.activity.View.AllAnimeFragment;
+import activity.Model.Anime_info;
+import activity.Model.FavorisList;
+import activity.View.AllAnimeFragment;
 
 import java.util.List;
 

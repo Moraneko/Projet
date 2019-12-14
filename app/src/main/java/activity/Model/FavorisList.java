@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity.Model;
+package activity.Model;
 
 import java.util.HashMap;
 
@@ -29,6 +29,9 @@ public class FavorisList {
         } else {
             System.out.println("Cet anime est déjà supprimer de la liste des favoris");
         }
+    }
+    public HashMap<Integer,SingleInfo> getCurrentFavList() {
+        return favList;
     }
 
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="vertical"
-    tools:context=".java.activity.View.InfoActivity">
+    tools:context="activity.View.InfoActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"

@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity.Model;
+package activity.Model;
 
 
 import android.graphics.Bitmap;
@@ -20,7 +20,7 @@ public class SingleInfo {
     private int popularity;
     private String synopsis;
     private Bitmap img;
-    private  ArrayList<SingleInfo_Genre> genre = new ArrayList<>() ;
+    private  ArrayList<SingleInfo_Genre> genres = new ArrayList<>() ;
     private  ArrayList<SingleInfo_Studio> studio = new ArrayList<>();
 
     public int getMal_id() {
@@ -122,7 +122,7 @@ public class SingleInfo {
     }
 
     public ArrayList<SingleInfo_Genre> getGenre() {
-        return genre;
+        return genres;
     }
 
     public ArrayList<SingleInfo_Studio> getStudio() {
@@ -147,7 +147,7 @@ public class SingleInfo {
     }
     public String getGenreStr(){
         StringBuilder sb = new StringBuilder();
-        for(SingleInfo_Genre g : genre){
+        for(SingleInfo_Genre g : genres){
             sb.append(" -"+g.getName()+"\n");
         }
         return sb.toString();

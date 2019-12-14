@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity.Model;
+package activity.Model;
 
 public class SingleInfo_Genre {
     private float mal_id;

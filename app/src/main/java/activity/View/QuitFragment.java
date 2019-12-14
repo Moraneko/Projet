@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity.View;
+package activity.View;
 
 import androidx.fragment.app.Fragment;
 

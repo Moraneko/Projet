@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".java.activity.View.MainPage"></activity>
-        <activity android:name=".java.activity.View.InfoActivity" />
-        <activity android:name=".java.activity.View.row_activity" />
-        <activity android:name=".java.activity.View.MainActivity">
+        <activity android:name="activity.View.MainPage"></activity>
+        <activity android:name="activity.View.InfoActivity" />
+        <activity android:name="activity.View.row_activity" />
+        <activity android:name="activity.View.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

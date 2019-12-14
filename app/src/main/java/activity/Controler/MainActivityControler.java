@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity.Controler;
+package activity.Controler;
 
 import android.content.Intent;
 import android.view.View;
@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.vogella.android.projet.R;
-import com.vogella.android.projet.java.activity.View.MainPage;
+import activity.View.MainPage;
 
 
 public class MainActivityControler {

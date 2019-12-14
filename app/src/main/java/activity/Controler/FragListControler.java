@@ -1,6 +1,5 @@
-package com.vogella.android.projet.java.activity.Controler;
+package activity.Controler;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,14 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vogella.android.projet.R;
-import com.vogella.android.projet.java.activity.Model.Anime_info;
-import com.vogella.android.projet.java.activity.Model.JikkanAPI;
-import com.vogella.android.projet.java.activity.Model.ReponseAPI;
+import activity.Model.Anime_info;
+import activity.Model.JikkanAPI;
+import activity.Model.ReponseAPI;
 
 import java.util.List;
 
@@ -80,13 +77,15 @@ public class FragListControler  {
         call.enqueue(new Callback<ReponseAPI>() {
             @Override
             public void onResponse(Call<ReponseAPI> call, Response<ReponseAPI> response) {
-                ReponseAPI restAnime = response.body();
-                List<Anime_info> listAnime = restAnime.getResult();
-                mainContoler.setDataFromApi(listAnime);
-                RecyclerAdapter adapter = new RecyclerAdapter(recyclerView.getContext(), mainContoler.getDataFromApi(),mainContoler.getFavorisList());
-                recyclerView.setAdapter(adapter);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+                if( response.body() != null) {
+                    ReponseAPI restAnime = response.body();
+                    List<Anime_info> listAnime = restAnime.getResult();
+                    mainContoler.setDataFromApi(listAnime);
+                    RecyclerAdapter adapter = new RecyclerAdapter(recyclerView.getContext(), mainContoler.getDataFromApi(), mainContoler.getFavorisList());
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+                }
             }
             @Override
             public void onFailure(Call<ReponseAPI> call, Throwable t) {

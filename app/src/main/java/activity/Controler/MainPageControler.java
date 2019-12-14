@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity.Controler;
+package activity.Controler;
 
 import android.view.View;
 import android.widget.ImageButton;
@@ -6,11 +6,10 @@ import android.widget.ImageButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vogella.android.projet.R;
-import com.vogella.android.projet.java.activity.Model.Anime_info;
-import com.vogella.android.projet.java.activity.Model.FavorisList;
-import com.vogella.android.projet.java.activity.Model.JikkanAPI;
-import com.vogella.android.projet.java.activity.Model.ReponseAPI;
-import com.vogella.android.projet.java.activity.Model.SingleInfo;
+import activity.Model.Anime_info;
+import activity.Model.FavorisList;
+import activity.Model.JikkanAPI;
+import activity.Model.SingleInfo;
 
 import java.util.HashSet;
 import java.util.List;
@@ -79,7 +78,6 @@ public class MainPageControler {
     public void setDataFromApi(List<Anime_info> data) {
         dataFromApi = data;
     }
-
     public String getName() {
         return userName;
     }

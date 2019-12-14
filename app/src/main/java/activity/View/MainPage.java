@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity.View;
+package activity.View;
 
         import com.google.android.material.navigation.NavigationView;
 
@@ -11,7 +11,7 @@ package com.vogella.android.projet.java.activity.View;
         import android.view.View;
 
         import com.vogella.android.projet.R;
-        import com.vogella.android.projet.java.activity.Controler.MainPageControler;
+        import activity.Controler.MainPageControler;
 
 public class MainPage extends AppCompatActivity  {
     DrawerLayout drawerLayout;

@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity.Controler;
+package activity.Controler;
 
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.vogella.android.projet.R;
-import com.vogella.android.projet.java.activity.Model.Anime_info;
+import activity.Model.Anime_info;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {

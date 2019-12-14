@@ -1,11 +1,11 @@
-package com.vogella.android.projet.java.activity.View;
+package activity.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import com.vogella.android.projet.R;
-import com.vogella.android.projet.java.activity.Controler.MainActivityControler;
+import activity.Controler.MainActivityControler;
 
 public class MainActivity extends AppCompatActivity {
     private MainActivityControler controler;

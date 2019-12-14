@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity.View;
+package activity.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vogella.android.projet.R;
-import com.vogella.android.projet.java.activity.Controler.AdapterInfo;
-import com.vogella.android.projet.java.activity.Model.JikkanAPI;
-import com.vogella.android.projet.java.activity.Model.SingleInfo;
+import activity.Controler.AdapterInfo;
+import activity.Model.JikkanAPI;
+import activity.Model.SingleInfo;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -1,4 +1,4 @@
-package com.vogella.android.projet.java.activity.Controler;
+package activity.Controler;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -11,16 +11,19 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.vogella.android.projet.R;
 
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
+import activity.Model.FavorisList;
+import activity.Model.SingleInfo;
+import activity.Model.SingleInfo_Genre;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,15 +44,32 @@ public class ProfileControler implements OnChartValueSelectedListener  {
     }
 
     public View initView() {
+        HashMap<Integer, SingleInfo> favList = this.mainContoler.getFavorisList().getCurrentFavList();
+        HashMap<String, Integer> dataList = new HashMap<>();
+        for( int i : favList.keySet()){
+            for (SingleInfo_Genre j : favList.get(i).getGenre()){
+                if(dataList.keySet().contains(j.getName())){
+                    dataList.put(j.getName(),dataList.get(j.getName())+1);
+                } else {
+                    dataList.put(j.getName(),1);
+                }
+            }
+        }
         View profileView = inflater.inflate(R.layout.fragment_profile, container, false);
         PieChart pieChart = profileView.findViewById(R.id.piechart);
         pieChart.setUsePercentValues(true);
         ArrayList<Entry> yvalues = new ArrayList<>();
-         yvalues.add(new Entry(8f, 0));
-        PieDataSet dataSet = new PieDataSet(yvalues, "Election Results");
+        int xindex = 0;
+        for(String i : dataList.keySet()){
+            yvalues.add(new Entry(dataList.get(i), xindex));
+            xindex++;
+        }
+        PieDataSet dataSet = new PieDataSet(yvalues, "Genres totaux");
 
         ArrayList<String> xvalues = new ArrayList<String>();
-        xvalues.add("January");
+        for(String i : dataList.keySet()){
+            xvalues.add(i);
+        }
         dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
         PieData data = new PieData(xvalues, dataSet);
         data.setValueFormatter(new PercentFormatter());

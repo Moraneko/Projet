@@ -1,10 +1,12 @@
-package com.vogella.android.projet.java.activity.View;
+package activity.View;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,17 +15,22 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.vogella.android.projet.R;
-import com.vogella.android.projet.java.activity.Controler.FragListControler;
-import com.vogella.android.projet.java.activity.Controler.MainPageControler;
 
-/**
- * Provides UI for the view with List.
- */
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayer.OnInitializedListener;
+import com.google.android.youtube.player.YouTubePlayer.Provider;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+import com.vogella.android.projet.R;
+import activity.Controler.FragListControler;
+import activity.Controler.MainPageControler;
+
+
 public class AllAnimeFragment extends Fragment {
     private Boolean apiEndCall = false;
     private MainPageControler mainControler;
     private FragListControler fragListContrler;
+    private YouTubePlayer YPlayer;
 
     public AllAnimeFragment(MainPageControler mainControler){
         this.mainControler = mainControler;
@@ -31,10 +38,12 @@ public class AllAnimeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        fragListContrler = new FragListControler(mainControler, inflater, container, savedInstanceState, getActivity());
-        return fragListContrler.initView();
-    }
 
+        fragListContrler = new FragListControler(mainControler, inflater, container, savedInstanceState, getActivity());
+        View listView = fragListContrler.initView();
+
+        return listView;
+    }
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView avator;
         public TextView name;

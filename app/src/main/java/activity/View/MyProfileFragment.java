@@ -1,16 +1,16 @@
-package com.vogella.android.projet.java.activity.View;
+package activity.View;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.vogella.android.projet.java.activity.Controler.MainPageControler;
-import com.vogella.android.projet.java.activity.Controler.ProfileControler;
+import activity.Controler.MainPageControler;
+import activity.Controler.ProfileControler;
 
 import androidx.fragment.app.Fragment;
 
-public class MyProfileFragment extends Fragment {
+public class MyProfileFragment extends Fragment  {
     private MainPageControler mainControler;
     private ProfileControler profileControler;
 

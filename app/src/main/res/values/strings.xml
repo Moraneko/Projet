@@ -4,4 +4,7 @@
     <string name="Acceuil_str">Ani-liste</string>
     <string name="desc_str">test1</string>
     <string name="titre_str">test2</string>
+    <string name="player_error">Error initializing YouTube player: %s</string>
+    <string name="seek_to">Jump To</string>
+    <string name="seek_to_hint">Seconds</string>
 </resources>
