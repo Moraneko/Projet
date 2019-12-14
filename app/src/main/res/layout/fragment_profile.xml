@@ -6,24 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/carOfPieChart"
-        style="@style/CardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="96dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Info2">
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/piechart"
             android:layout_width="280dp"
-            android:layout_height="480dp">
+            android:layout_height="480dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginLeft="64dp"
+            android:layout_marginTop="96dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
         </com.github.mikephil.charting.charts.PieChart>
-    </com.google.android.material.card.MaterialCardView>
 
 
     <TextView
@@ -33,10 +26,10 @@
         android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text=""
-        app:layout_constraintBottom_toBottomOf="@+id/carOfPieChart"
+        app:layout_constraintBottom_toBottomOf="@+id/piechart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/carOfPieChart" />
+        app:layout_constraintTop_toTopOf="@+id/piechart" />
 
     <TextView
         android:id="@+id/titreOfPage"
@@ -58,7 +51,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carOfPieChart" />
+        app:layout_constraintTop_toBottomOf="@+id/piechart" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"

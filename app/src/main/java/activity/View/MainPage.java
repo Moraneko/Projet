@@ -12,8 +12,12 @@ package activity.View;
         import android.os.Bundle;
         import android.view.MenuItem;
         import android.view.View;
+        import android.widget.TextView;
 
         import com.vogella.android.projet.R;
+
+        import org.w3c.dom.Text;
+
         import activity.Controler.MainPageControler;
 
 public class MainPage extends AppCompatActivity {
@@ -45,6 +49,9 @@ public class MainPage extends AppCompatActivity {
         fragQuit = new QuitFragment();
         drawerLayout = findViewById(R.id.drawer_layout_id);
         NavigationView navView = findViewById(R.id.navigation_id);
+        View headerNav = navView.getHeaderView(0);
+        TextView userNameNav = headerNav.findViewById(R.id.usernameNav);
+        userNameNav.setText(mainControler.getName());
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {

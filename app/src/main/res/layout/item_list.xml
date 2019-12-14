@@ -32,7 +32,8 @@
         android:clickable="true"
         android:focusable="true"
         android:onClick="clickList"
-        android:tag="@+id/tag1">
+        android:tag="@+id/tag1"
+        app:cardBackgroundColor="#8AFFFFFF">
 
 
         <RelativeLayout
