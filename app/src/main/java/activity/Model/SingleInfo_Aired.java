@@ -1,6 +1,8 @@
 package activity.Model;
 
-public class SingleInfo_Aired {
+import java.io.Serializable;
+
+public class SingleInfo_Aired  implements Serializable {
     private String string;
 
     public String getString() {

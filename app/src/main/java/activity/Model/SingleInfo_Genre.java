@@ -1,6 +1,8 @@
 package activity.Model;
 
-public class SingleInfo_Genre {
+import java.io.Serializable;
+
+public class SingleInfo_Genre  implements Serializable {
     private float mal_id;
     private String type;
     private String name;

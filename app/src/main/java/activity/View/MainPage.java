@@ -1,22 +1,19 @@
 package activity.View;
 
-        import com.github.mikephil.charting.data.Entry;
-        import com.github.mikephil.charting.highlight.Highlight;
-        import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
         import com.google.android.material.navigation.NavigationView;
 
         import androidx.drawerlayout.widget.DrawerLayout;
         import androidx.fragment.app.Fragment;
         import androidx.fragment.app.FragmentTransaction;
         import androidx.appcompat.app.AppCompatActivity;
+
+        import android.app.Activity;
         import android.os.Bundle;
         import android.view.MenuItem;
         import android.view.View;
         import android.widget.TextView;
 
         import com.vogella.android.projet.R;
-
-        import org.w3c.dom.Text;
 
         import activity.Controler.MainPageControler;
 
@@ -32,7 +29,7 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
         String userName = getIntent().getStringExtra("userName");
-        mainControler = new MainPageControler(findViewById(R.id.main_content), userName);
+        mainControler = new MainPageControler(findViewById(R.id.main_content), userName, this);
         // Adding Drawer to Main Screen
         initNavDrawer();
         // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -44,9 +41,9 @@ public class MainPage extends AppCompatActivity {
     }
 
     private void initNavDrawer() {
-        fragList = new AllAnimeFragment(mainControler);
+        fragList = new AllAnimeFragment(mainControler, this);
         fragProfile = new MyProfileFragment(mainControler);
-        fragQuit = new QuitFragment();
+        fragQuit = new QuitFragment(mainControler);
         drawerLayout = findViewById(R.id.drawer_layout_id);
         NavigationView navView = findViewById(R.id.navigation_id);
         View headerNav = navView.getHeaderView(0);
@@ -84,4 +81,16 @@ public class MainPage extends AppCompatActivity {
         mainControler.clickFavoris(v.getTag(), v);
     }
 
+    public void quit(View v) { mainControler.clickQuit();}
+
+    public void retour(View v) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame, fragList); // replace a Fragment with Frame Layout
+        transaction.commit();
+        drawerLayout.closeDrawers();
+    }
+
+    public Activity getActivity() {
+        return this;
+    }
 }

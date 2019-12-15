@@ -11,9 +11,17 @@ import activity.Model.FavorisList;
 import activity.Model.JikkanAPI;
 import activity.Model.SingleInfo;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import java.util.List;
 
+import activity.View.MainPage;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,12 +32,28 @@ public class MainPageControler {
     private View v;
     private String userName;
     private FavorisList favModel;
+    private MainPage mainPage;
     private List<Anime_info> dataFromApi;
     private HashSet<Integer> waitingToAdd;
-    public MainPageControler(View v,String name){
+    public MainPageControler(View v, String name, MainPage mainPage){
         this.userName = name;
         this.v = v;
-        this.favModel = new FavorisList();
+        this.mainPage = mainPage;
+        try {
+            File file = new File(mainPage.getBaseContext().getFilesDir(), userName+".ser");
+            if(!file.exists()) {
+                this.favModel = new FavorisList();
+                System.out.println(file);
+            } else {
+                FileInputStream fos = mainPage.getBaseContext().openFileInput(userName+".ser");
+                ObjectInputStream ois = new ObjectInputStream(fos);
+                this.favModel = (FavorisList) ois.readObject();
+            }
+        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+        } catch (ClassNotFoundException e) {
+        }
+
         this.waitingToAdd = new HashSet<>();
 
     }
@@ -80,5 +104,22 @@ public class MainPageControler {
     }
     public String getName() {
         return userName;
+    }
+
+    public void clickQuit() {
+        try {
+            File file = new File(mainPage.getBaseContext().getFilesDir(), userName+".ser");
+            file.createNewFile();
+            FileOutputStream fos = mainPage.getBaseContext().openFileOutput(userName+".ser",mainPage.getBaseContext().MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(favModel);
+            oos.close();
+            fos.close();
+            mainPage.finish();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

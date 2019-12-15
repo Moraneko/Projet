@@ -5,8 +5,6 @@ import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,30 +14,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayer.OnInitializedListener;
-import com.google.android.youtube.player.YouTubePlayer.Provider;
-import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.vogella.android.projet.R;
 import activity.Controler.FragListControler;
 import activity.Controler.MainPageControler;
 
 
 public class AllAnimeFragment extends Fragment {
-    private Boolean apiEndCall = false;
     private MainPageControler mainControler;
     private FragListControler fragListContrler;
-    private YouTubePlayer YPlayer;
+    private MainPage mainPage;
 
-    public AllAnimeFragment(MainPageControler mainControler){
+    public AllAnimeFragment(MainPageControler mainControler, MainPage mainPage){
         this.mainControler = mainControler;
+        this.mainPage = mainPage;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        fragListContrler = new FragListControler(mainControler, inflater, container, savedInstanceState, getActivity());
+        fragListContrler = new FragListControler(mainControler, inflater, container, savedInstanceState, getActivity(), mainPage);
         View listView = fragListContrler.initView();
 
         return listView;

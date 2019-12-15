@@ -1,5 +1,7 @@
 package activity.Controler;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import activity.Model.ReponseAPI;
 
 import java.util.List;
 
+import activity.View.MainPage;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,13 +37,15 @@ public class FragListControler  {
     private RecyclerView recyclerView;
     private Integer page = 1;
     private FragmentActivity activity;
+    private SharedPreferences sharedPref;
 
-    public FragListControler(MainPageControler mainControler, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, FragmentActivity activity) {
+    public FragListControler(MainPageControler mainControler, LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, FragmentActivity activity, MainPage mainPage) {
         this.mainContoler = mainControler;
         this.inflater = inflater;
         this.container = container;
         this.savedInstanceState = savedInstanceState;
         this.activity = activity;
+        this.sharedPref = mainPage.getActivity().getPreferences(Context.MODE_PRIVATE);
     }
     public View initView() {
         Gson gson = new GsonBuilder().setLenient().create();
@@ -56,7 +61,11 @@ public class FragListControler  {
             @Override
             public void onClick(View v) {
                 page++;
-                appelApi();
+                if (sharedPref.contains(page.toString())){
+                    getDataFromPref(gson);
+                } else {
+                    appelApi();
+                }
             }
         });
         Button prec = retView.findViewById(R.id.precedent);
@@ -65,13 +74,34 @@ public class FragListControler  {
             public void onClick(View v) {
                 if(page>1){
                     page--;
-                    appelApi();
+                    if (sharedPref.contains(page.toString())){
+                        System.out.println("TEST");
+                        getDataFromPref(gson);
+                    } else {
+                        appelApi();
+                    }
                 }
             }
         });
-        appelApi();
+        if (sharedPref.contains(page.toString())){
+            getDataFromPref(gson);
+        } else {
+            appelApi();
+        }
         return retView;
     }
+
+    private void getDataFromPref(Gson gson) {
+        String json = sharedPref.getString(page.toString(), "");
+        ReponseAPI restAnime = gson.fromJson(json, ReponseAPI.class);
+        List<Anime_info> listAnime = restAnime.getResult();
+        mainContoler.setDataFromApi(listAnime);
+        RecyclerAdapter adapter = new RecyclerAdapter(recyclerView.getContext(), mainContoler.getDataFromApi(), mainContoler.getFavorisList());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+    }
+
     private View appelApi() {
         Call<ReponseAPI> call = this.api.getListAnime(this.page.toString());
         call.enqueue(new Callback<ReponseAPI>() {
@@ -80,6 +110,13 @@ public class FragListControler  {
                 if( response.body() != null) {
                     ReponseAPI restAnime = response.body();
                     List<Anime_info> listAnime = restAnime.getResult();
+                    //SharedPref
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(restAnime);
+                    editor.putString(page.toString(), json);
+                    editor.commit();
+                    //SharedPref
                     mainContoler.setDataFromApi(listAnime);
                     RecyclerAdapter adapter = new RecyclerAdapter(recyclerView.getContext(), mainContoler.getDataFromApi(), mainContoler.getFavorisList());
                     recyclerView.setAdapter(adapter);

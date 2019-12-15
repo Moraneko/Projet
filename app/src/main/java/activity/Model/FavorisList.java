@@ -1,8 +1,9 @@
 package activity.Model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class FavorisList {
+public class FavorisList implements Serializable {
     private HashMap<Integer,SingleInfo> favList;
     public FavorisList () {
         this.favList = new HashMap<>();

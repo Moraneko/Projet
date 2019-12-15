@@ -1,6 +1,8 @@
 package activity.Model;
 
-public class SingleInfo_Studio {
+import java.io.Serializable;
+
+public class SingleInfo_Studio implements Serializable {
     private String name;
 
     public String getName() {

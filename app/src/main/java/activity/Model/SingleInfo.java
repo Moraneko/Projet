@@ -3,9 +3,10 @@ package activity.Model;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SingleInfo {
+public class SingleInfo  implements Serializable {
     private int mal_id;
     private String image_url;
     private String title;

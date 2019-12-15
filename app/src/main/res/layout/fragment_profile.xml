@@ -31,22 +31,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/piechart" />
 
-    <TextView
-        android:id="@+id/titreOfPage"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/titleCard"
+        style="@style/CardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        android:textSize="30sp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <TextView
+            android:id="@+id/titreOfPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="30sp" />
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/Info2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
         android:text="Nombre total d'épisode"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
