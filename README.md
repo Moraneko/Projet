@@ -35,7 +35,7 @@ Application permettant de choisir les animés à partir d'une liste récupérer 
 
 - Drawer pour changer de fragment : 
 
-<img src="img_readme/drawer.jpg" alt="drawer">
+<img src="img_readme/drawer.jpg" alt="drawer" width="250">
 
 
 ### Ecran Principale : Fragment - Profile :
