@@ -24,7 +24,7 @@ Application permettant de choisir les animés à partir d'une liste récupérer 
 
 - L'utilisation requier que l'utilisateur choisisse un nom pour pouvoir sauvegarder ses données.
 
-<img src="img_readme/connexion_design.jpg" alt="design">   <img src="img_readme/connexion.jpg" alt="connect">
+<img src="img_readme/connexion_design.jpg" alt="design" width="250">   <img src="img_readme/connexion.jpg" alt="connect" width="250">
 
 
 ### Ecran Principale : Fragment - Liste d'animé :
