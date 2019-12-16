@@ -31,7 +31,7 @@ Application permettant de choisir les animés à partir d'une liste récupérer 
 
 - Affiche les informations de base d'un animé et des boutons "favoris" pour les ajoutés à la liste de l'utilisateur.
 
-<img src="img_readme/main_page.jpg" alt="liste"> <img src="img_readme/main_page_favoris.jpg" alt="boutons"> <img src="img_readme/bouton.jpg" alt="next">
+<img src="img_readme/main_page.jpg" alt="liste" width="250"> <img src="img_readme/main_page_favoris.jpg" alt="boutons" width="250"> <img src="img_readme/bouton.jpg" alt="next" width="250">
 
 - Drawer pour changer de fragment : 
 
@@ -42,14 +42,14 @@ Application permettant de choisir les animés à partir d'une liste récupérer 
 
 - Affiche des nombres d'épisode regardés ainsi que les statistiques des genres regardés dans un graphe circulaire et possibilité de cliquer sur les éléments du graphe.
 
-<img src="img_readme/profile_page.jpg" alt="profile"> <img src="img_readme/profile_page_click.jpg" alt="profile_click">
+<img src="img_readme/profile_page.jpg" alt="profile" width="250"> <img src="img_readme/profile_page_click.jpg" alt="profile_click" width="250">
 
 ### Ecran Principale : Fragment - Quiter :
 
 - Permet à l'utilisateur de quitter la vue principale et sauvegarder sa liste ou alors de retourné à la page de liste d'animé.
 
-<img src="img_readme/quit.jpg" alt="quit">
+<img src="img_readme/quit.jpg" alt="quit" width="250">
 
 - On peut retrouver que si on s'identifie avec un nom déjà entré la liste de favoris sera récupérer à partir des fichier de sauvegarde: 
 
-<img src="img_readme/otherAccout.jpg" alt="otherAccount">
+<img src="img_readme/otherAccout.jpg" alt="otherAccount" width="250">
